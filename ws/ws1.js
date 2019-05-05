@@ -14,7 +14,7 @@ wss.on('connection', function (ws) {
     ws.on('message', function (message) {
         console.log(`[SERVER] Received: ${message}`);
         ws.send(`ECHO: ${message}`, (err) => {
-            console.log('dddddd')
+            // console.log('dddddd')
             if (err) {
                 console.log(`[SERVER] error: ${err}`);
             }
