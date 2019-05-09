@@ -6,7 +6,7 @@ const WebSocketServer = WebSocket.Server;
 
 // 实例化:
 const wss = new WebSocketServer({
-    port: 8001
+    port: 8003
 });
 console.log(wss)
 wss.on('connection', function (ws) {
@@ -24,26 +24,26 @@ wss.on('connection', function (ws) {
 
 console.log('ws server started at port 8001...');
 
-// // client test:
+// client test:
 
-// let count = 0;
+let count = 0;
 
-// let ws = new WebSocket('ws://localhost:8001');
+let ws = new WebSocket('ws://localhost:8003');
 
-// ws.on('open', function () {
-//     console.log(`[CLIENT] open()`);
-//     ws.send('Hello!');
-// });
+ws.on('open', function () {
+    console.log(`[CLIENT] open()`);
+    ws.send('Hello!');
+});
 
-// ws.on('message', function (message) {
-//     console.log(`[CLIENT] Received: ${message}`);
-//     count++;
-//     if (count > 3) {
-//         ws.send('Goodbye!');
-//         ws.close();
-//     } else {
-//         setTimeout(() => {
-//             ws.send(`Hello, I'm Mr No.${count}!`);
-//         }, 1000);
-//     }
-// });
+ws.on('message', function (message) {
+    console.log(`[CLIENT] Received: ${message}`);
+    count++;
+    if (count > 3) {
+        ws.send('Goodbye!');
+        ws.close();
+    } else {
+        setTimeout(() => {
+            ws.send(`Hello, I'm Mr No.${count}!`);
+        }, 1000);
+    }
+});

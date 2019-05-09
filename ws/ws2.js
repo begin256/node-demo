@@ -1,42 +1,57 @@
 const WebSocket = require('ws');
  
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://localhost:8002');
  
+
+////
+// ws.on('open', function open() {
+//   ws.send('something');
+// });
+ 
+// ws.on('message', function incoming(data) {
+//   console.log(data);
+// });
+
+
+////
+// ws.on('open', function open() {
+//   const array = new Float32Array(5);
+ 
+//   for (var i = 0; i < array.length; ++i) {
+//     array[i] = i / 2;
+//   }
+ 
+//   ws.send(array);
+// });
+
+
+
+////
 ws.on('open', function open() {
-  ws.send('something');
+  console.log('connected');
+  ws.send('Date.now()------------');
+});
+ 
+ws.on('close', function close() {
+  console.log('disconnected');
 });
  
 ws.on('message', function incoming(data) {
-//   console.log(data.readyState);
+  console.log(`Roundtrip time: `);
+ 
+  setTimeout(function timeout() {
+    ws.send('new Date()+++++++++');
+  }, 500);
 });
 
-// const WebSocket = require('ws');
  
 const wss = new WebSocket.Server({
-  port: 8080,
-//   perMessageDeflate: {
-//     zlibDeflateOptions: {
-//       // See zlib defaults.
-//       chunkSize: 1024,
-//       memLevel: 7,
-//       level: 3
-//     },
-//     zlibInflateOptions: {
-//       chunkSize: 10 * 1024
-//     },
-//     // Other options settable:
-//     clientNoContextTakeover: true, // Defaults to negotiated value.
-//     serverNoContextTakeover: true, // Defaults to negotiated value.
-//     serverMaxWindowBits: 10, // Defaults to negotiated value.
-//     // Below options specified as default values.
-//     concurrencyLimit: 10, // Limits zlib concurrency for perf.
-//     threshold: 1024 // Size (in bytes) below which messages
-//     // should not be compressed.
-//   }
+  port: 8002,
 });
 wss.on('connection',function(ws) {
     // console.log('conn')
     ws.on('message',function(message){
         console.log('received:'+ message)
     })
+    ws.send('server send')
 })
