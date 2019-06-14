@@ -4,7 +4,7 @@ var app = express();
  
 app.get('/', function (req, res) {
    res.send('Hello World');
-   console.log(req.baseUrl,res.cookie)
+   console.log(req.baseUrl,res.cookie,res.status)
 })
  
 var server = app.listen(8081, function () {

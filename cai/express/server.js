@@ -79,11 +79,12 @@ app.get('/index.html', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
  
-app.post('/file_upload', function (req, res) {
+app.post('/file_upload/test', function (req, res) {
  
    console.log(req.files[0]);  // 上传的文件信息
  
    var des_file = __dirname + "/" + req.files[0].originalname;
+   console.log(des_file)
    fs.readFile( req.files[0].path, function (err, data) {
         fs.writeFile(des_file, data, function (err) {
          if( err ){
