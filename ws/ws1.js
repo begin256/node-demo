@@ -47,3 +47,4 @@ ws.on('message', function (message) {
         }, 1000);
     }
 });
+//--force
